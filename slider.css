@@ -1,0 +1,56 @@
+.sliderBar{
+    position: relative;
+    width: 100%;
+}
+.sliderBar .sliderName{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+}
+.sliderBar .sliderName>span{
+    flex: auto;
+}
+.slot{
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+    z-index: 5;
+    border-radius: 5px;
+}
+.process, #process_red_bg{
+    background-color: #0055ff;
+    z-index: 20;
+    width: 100%;
+}
+.red{
+    background: linear-gradient(to right, #78fcef, #f14342);
+}
+.green{
+    background: linear-gradient(to right, #e93add, #58ee69);
+}
+.blue{
+    background: linear-gradient(to right, #fbf97e, #202b7d);
+}
+.contrast{
+    background: linear-gradient(to right, #6f84c3, #6f84c3);
+}
+.saturation{
+    background: linear-gradient(to right, #7987aa, #7987aa);
+}
+.slider{
+    position: absolute;
+    top: 92%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 38px;
+    z-index: 30;
+    cursor: move;
+    background-image: url(img/slider.png);
+    background-size: cover;
+}
+.percent{
+    color: #7e7d7d;
+    text-align: right;
+    font-size: 16px;
+}

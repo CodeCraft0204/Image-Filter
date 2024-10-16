@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="ymModal.css">
+    <link rel="stylesheet" href="slider.css">
+
+</head>
+<body>
+    <div class="pageMain">
+        <!-- Header title -->
+        <div class="header">
+            <div class="logo">Camp Snap Custom Filter Editor</div>
+        </div>
+
+        <!-- Main image content -->
+        <div class="imgConten">
+            <!-- Main image right color bar -->
+            <div class="custom_filter">
+                <div class="custom_header">
+                    <span>Custom Filter</span>
+                </div>
+
+                <div class="custom_content"  id="cus_id">
+                    <div class="my_slide">
+                        <div id="sliderBar_red" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Red</span>
+                                <!-- Value -->
+                                <span id="percent_red" class="percent">0</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_red" class="process slot red"></div>
+                            <!-- Slider -->
+                            <div id="slider_red" class="slider"></div>
+                        </div>
+                    </div>
+                    <div class="my_slide">
+                        <div id="sliderBar_green" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Green</span>
+                                <!-- Value -->
+                                <span id="percent_green" class="percent">0</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_green" class="process slot green"></div>
+                            <!-- Slider -->
+                            <div id="slider_green" class="slider"></div>
+                        </div>
+                    </div>
+                    <div class="my_slide">
+                        <div id="sliderBar_blue" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Blue</span>
+                                <!-- Value -->
+                                <span id="percent_blue" class="percent">0</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_blue" class="process slot blue"></div>
+                            <!-- Slider -->
+                            <div id="slider_blue" class="slider"></div>
+                        </div>
+                    </div>
+                    <div class="my_slide">
+                        <div id="sliderBar_brightness" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Brightness</span>
+                                <!-- Value -->
+                                <span id="percent_brightness" class="percent">50</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_brightness" class="process slot saturation"></div>
+                            <!-- Slider -->
+                            <div id="slider_brightness" class="slider"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="my_slide">
+                        <div id="sliderBar_contrast" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Contrast</span>
+                                <!-- Value -->
+                                <span id="percent_contrast" class="percent">0</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_contrast" class="process slot contrast"></div>
+                            <!-- Slider -->
+                            <div id="slider_contrast" class="slider"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="my_slide">
+                        <div id="sliderBar_saturation" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Saturation</span>
+                                <!-- Value -->
+                                <span id="percent_saturation" class="percent">0</span>
+                            </div>
+                            <!-- Progress bar -->
+                            <div id="process_saturation" class="process slot saturation"></div>
+                            <!-- Slider -->
+                            <div id="slider_saturation" class="slider"></div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="my_slide">
+                        <div id="sliderBar_WB" class="sliderBar">
+                            <div class="sliderName">
+                                <span>White Balance</span>
+
+                                <span id="percent_WB" class="percent">0</span>
+                            </div>
+
+                            <div id="process_WB" class="process slot saturation"></div>
+
+                            <div id="slider_WB" class="slider"></div>
+                        </div>
+                    </div>
+                   -->
+                   <!--
+                    <div class="my_slide">
+                        <div id="sliderBar_EV" class="sliderBar">
+                            <div class="sliderName">
+                                <span>Exposure Values</span>
+
+                                <span id="percent_EV" class="percent">0</span>
+                            </div>
+
+                            <div id="process_EV" class="process slot saturation"></div>
+
+                            <div id="slider_EV" class="slider"></div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="save" id="loadFilter">
+                    Load Filter
+                    <input type="file" id="fileInput" accept=".flt" style="display: none;"/>
+                    <input type="file" id="fileInput2" style="display: none;"/>
+                </div>
+            </div>
+            <!-- Main image middle color picture -->
+            <div class="imgFilter" id="main_img">
+                <canvas id="imgShow" class="mainimg"></canvas>
+                <!--  <img id="imgShow"  src="img/hj.jpg" alt="">
+                <div id="imgShow" class="mainimg"></div>-->
+                  <div class="replace" id="Replace" style="display: none;">
+                      <input type="file" id="files" name="files" accept="image/*" />
+                      Replace the Image
+                  </div>
+              </div>
+              <!-- Main image left sample picture -->
+            <div class="exportFilter">
+                <!-- Main image left sample picture list -->
+                <div id="imageListExport">
+                    <span><img src="img/top.jpg" id="samimg1"></span>
+                    <span><img src="img/mid.jpg" id="samimg2"></span>
+                    <span><img src="img/bot.jpg" id="samimg3"></span>
+                </div>
+                <!-- Main image left output button -->
+                <div class="exportBtn" id="exportBtn">
+                    Save Filter
+                </div>
+            </div>
+        </div>
+        <!-- Footer image list -->
+        <div class="footer">
+            <div class="carousel">
+                <!-- Left arrow button -->
+                <span class="arrow left" id="prevBtn"></span>
+                <!-- Image list -->
+                <ul id="imageList" class="imgUl"></ul>
+                <!-- Right arrow button -->
+                <span class="arrow right" id="nextBtn"></span>
+            </div>
+        </div>
+        <!-- Pop-up box -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+            <span class="close" id="closeBtn">&times;</span>
+            <p>Please enter a name：‌</p>
+            <input type="text" id="nameInput">
+            <button id="saveBtn">Save</button>
+            </div>
+        </div>
+
+        <div id="myModal1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" id="closeBtn1">&times;</span>
+                <p>Upgrade instructions: </p>
+                <p>1, Copy the Filter. txt file to the root directory of the camera's TF card. </p>
+                <p>2, Press the shutter button once. </p>
+                <p>3, The screen displays UPd and automatically shuts down after the upgrade is completed.</p>
+                <p>4. Upgrade completed. </p>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script src="./myModal.js"></script>
+<!--<script src="./slider_ev.js"></script>-->
+<script src="./slider_red.js"></script>
+<script src="./slider_green.js"></script>
+<script src="./slider_blue.js"></script>
+<script src="./slider_contrast.js"></script>
+<script src="./slider_brightness.js"></script>
+<script src="./slider_saturation.js"></script>
+<script src="./index.js"></script>
+<script src="./jquery.min.js"></script>
+<script src="./konva.min.js"></script>
+<script src="./myfilter.js"></script>
+<script src="./fabric.min.js"></script>
+<script src="./customiseControls.min.js"></script>
+<!--<script src="./filereader.min.js"></script>
+<script src="./caman.full.js"></script>
+<script src="./jquery.mousewheel.min.js"></script>
+<script src="./script.js"></script>
+<script src="./camanjs/caman.full.pack.js"></script>-->
+<style scoped lang="css">
+</style>
+</html>
