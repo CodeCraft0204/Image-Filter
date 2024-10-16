@@ -869,7 +869,6 @@ function  adjcontrast()
         // ... existing code ...
 
         function fetchFltFiles() {
-            // This function will now fetch all .flt files from the defaultFlt folder
             fetch('defaultFlt/')
                 .then(response => response.text())
                 .then(html => {
@@ -881,44 +880,51 @@ function  adjcontrast()
                         .filter(href => href.endsWith('.flt'))
                         .map(href => href.split('/').pop());
         
+                    let processedFiles = 0;
+                    const totalFiles = fltFiles.length;
+        
                     fltFiles.forEach(file => {
                         fetch(`defaultFlt/${file}`)
                             .then(response => response.text())
                             .then(content => {
                                 processFileContent1(content, file);
+                                processedFiles++;
+                                if (processedFiles === totalFiles) {
+                                    createImgList(); // Call createImgList only when all files are processed
+                                }
                             })
-                            .catch(error => console.error('Error fetching .flt file:', error));
+                            .catch(error => {
+                                console.error('Error fetching .flt file:', error);
+                                processedFiles++;
+                                if (processedFiles === totalFiles) {
+                                    createImgList(); // Ensure createImgList is called even if there's an error
+                                }
+                            });
                     });
                 })
                 .catch(error => console.error('Error fetching directory listing:', error));
         }
-
+        
         function processFileContent1(content, filename) {
             const dataParts = content.split(',');
-            if (dataParts.length >= 12) { // Ensure there are enough parts
+            if (dataParts.length >= 12) {
                 const newEntry = {
-                    src: 'img/top.jpg', // Assuming the source image is the same for all
+                    src: 'img/top.jpg',
                     name: getFileName(filename),
                     id: getFileName(filename),
-                    rv: parseInt(dataParts[1]), // Red value
-                    gv: parseInt(dataParts[3]), // Green value
-                    bv: parseInt(dataParts[5]), // Blue value
-                    bri: parseInt(dataParts[7]), // Brightness
-                    con: parseInt(dataParts[9]), // Contrast
-                    sat: parseInt(dataParts[11]), // Saturation
-                    ev: 0, // Assuming default value
-                    wb: 0  // Assuming default value
+                    rv: parseInt(dataParts[1]),
+                    gv: parseInt(dataParts[3]),
+                    bv: parseInt(dataParts[5]),
+                    bri: parseInt(dataParts[7]),
+                    con: parseInt(dataParts[9]),
+                    sat: parseInt(dataParts[11]),
+                    ev: 0,
+                    wb: 0
                 };
-
-                // Check if the entry already exists
-                // console.log("Current totalImagesList:", totalImagesList);
+        
                 let exists = totalImagesList.some(item => item.name === newEntry.name);
-                // console.log(`Does ${newEntry.name} exist?`, exists);
                 if (!exists) {
                     totalImagesList.push(newEntry);
-                    if(totalImagesList.length == 9) {
-                        createImgList(); // Refresh the image list
-                    }
                 }
             }
         }
