@@ -869,29 +869,28 @@ function  adjcontrast()
         // ... existing code ...
 
         function fetchFltFiles() {
-            // Assuming you have a way to list the .flt files in the directory
-            // console.log("Fetching FLT files...");
-            const fltFiles = [
-                'Original.flt', 
-                'Film.flt',
-                'Movie.flt',
-                'Sharp.flt',
-                'Fade.flt',
-                'Retro.flt',
-                'Cold Color.flt',
-                'Relief.flt',
-                'Gray.flt'
-            ]; // Replace with actual file names or fetch dynamically
-
-            fltFiles.forEach(file => {
-                fetch(`defaultFlt/${file}`)
-                    .then(response => response.text())
-                    .then(content => {
-                        // console.log(`Processing ${file}`);
-                        processFileContent1(content, file);
-                    })
-                    .catch(error => console.error('Error fetching .flt file:', error));
-            });
+            // This function will now fetch all .flt files from the defaultFlt folder
+            fetch('defaultFlt/')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const links = doc.querySelectorAll('a');
+                    const fltFiles = Array.from(links)
+                        .map(link => link.href)
+                        .filter(href => href.endsWith('.flt'))
+                        .map(href => href.split('/').pop());
+        
+                    fltFiles.forEach(file => {
+                        fetch(`defaultFlt/${file}`)
+                            .then(response => response.text())
+                            .then(content => {
+                                processFileContent1(content, file);
+                            })
+                            .catch(error => console.error('Error fetching .flt file:', error));
+                    });
+                })
+                .catch(error => console.error('Error fetching directory listing:', error));
         }
 
         function processFileContent1(content, filename) {
