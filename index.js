@@ -414,9 +414,15 @@ function  adjcontrast()
     }
 
     function updateSlider(main_r, main_g, main_b, main_bri, main_con, main_sat) {
+        currentX_red = main_r * max_red / 100;
+        currentX_green = main_g * max_green / 100;
+        currentX_blue = main_b * max_blue / 100;
+        currentX_brightness = main_bri * max_brightness / 100;
+        currentX_contrast = main_con * max_contrast / 100;
+        currentX_saturation = main_sat * max_saturation / 100;
         // main_r
         percentage_r = Math.max(0, Math.min(100, main_r));
-        let newPosition_r = (percentage_r / 100) * max;
+        let newPosition_r = (percentage_r / 100) * max_red;
         let slider_r = document.getElementById('slider_red') 
         let percent_r = document.getElementById('percent_red')
         slider_r.style.left = newPosition_r + 'px';
@@ -424,7 +430,7 @@ function  adjcontrast()
 
         // main_g
         percentage_g = Math.max(0, Math.min(100, main_g));
-        let newPosition_g = (percentage_g / 100) * max;
+        let newPosition_g = (percentage_g / 100) * max_red;
         let slider_g = document.getElementById('slider_green') 
         let percent_g = document.getElementById('percent_green')
         slider_g.style.left = newPosition_g + 'px';
@@ -432,7 +438,7 @@ function  adjcontrast()
 
         // main_b
         percentage_b = Math.max(0, Math.min(100, main_b));
-        let newPosition_b = (percentage_b / 100) * max;
+        let newPosition_b = (percentage_b / 100) * max_red;
         let slider_b = document.getElementById('slider_blue') 
         let percent_b = document.getElementById('percent_blue')
         slider_b.style.left = newPosition_b + 'px';
@@ -440,7 +446,7 @@ function  adjcontrast()
 
         // main_bri
         percentage_bri = Math.max(0, Math.min(100, main_bri));
-        let newPosition_bri = (percentage_bri / 100) * max;
+        let newPosition_bri = (percentage_bri / 100) * max_red;
         let slider_bri = document.getElementById('slider_brightness') 
         let percent_bri = document.getElementById('percent_brightness')
         slider_bri.style.left = newPosition_bri + 'px';
@@ -448,7 +454,7 @@ function  adjcontrast()
 
         // main_con
         percentage_con = Math.max(0, Math.min(100, main_con));
-        let newPosition_con = (percentage_con / 100) * max;
+        let newPosition_con = (percentage_con / 100) * max_red;
         let slider_con = document.getElementById('slider_contrast') 
         let percent_con = document.getElementById('percent_contrast')
         slider_con.style.left = newPosition_con + 'px';
@@ -456,7 +462,7 @@ function  adjcontrast()
 
         // main_sat
         percentage_sat = Math.max(0, Math.min(100, main_sat));
-        let newPosition_sat = (percentage_sat / 100) * max;
+        let newPosition_sat = (percentage_sat / 100) * max_red;
         let slider_sat = document.getElementById('slider_saturation') 
         let percent_sat = document.getElementById('percent_saturation')
         slider_sat.style.left = newPosition_sat + 'px';
@@ -465,7 +471,7 @@ function  adjcontrast()
 
 
     function clicktoImgPara(pos){
-
+        // alert("pos" + pos);
         // var displayedImage = document.getElementById('imgShow');
         // displayedImage.src = this.src; // this refers to the clicked image
        // const img = document.querySelector('.imgFilter img');
@@ -620,7 +626,7 @@ function  adjcontrast()
                     const img = new Image(); // Create a new image element
 
                     img.onload = function() {
-                        console.log('object')
+                        // console.log('object')
                         // Clear the canvas before drawing
                         context_imgshow.clearRect(0, 0, canvas.width, canvas.height);
                         
@@ -637,6 +643,8 @@ function  adjcontrast()
                     mainimgsrc=e.target.result;
                     createImgList();
                     load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight);
+
+  
                 };
 
                 // Read the uploaded file
@@ -750,6 +758,9 @@ function  adjcontrast()
         }
 
         function processFileContent(content, filename) {
+            // alert("process File content");
+            // alert("currentPos : " + totalImagesList.length);
+            
             const dataParts = content.split(',');
             updateSlider(dataParts[1], dataParts[3], dataParts[5], dataParts[7], dataParts[9], dataParts[11]);
             let myname = filename;
@@ -774,10 +785,34 @@ function  adjcontrast()
                     con: dataParts[9],
                     sat: dataParts[11],
                 });
-                // console.log(totalImagesList)
                 // 刷新图片列表
                 createImgList();
-                //alert("Successfully saved!");
+
+                main_r=dataParts[1];
+                main_g=dataParts[3];
+                main_b=dataParts[5];
+                main_con=dataParts[9];
+                main_bri=dataParts[7];
+                main_sat=dataParts[11];
+                main_wb=0;
+                main_ev=0;
+                updateSlider(main_r, main_g, main_b, main_bri, main_con, main_sat);
+
+                // alert('The image is clicked!'+totalImagesList[pos].id+ main_r+','+ main_g+ ','+main_b+','+ main_bri+','+ main_con+','+ main_sat);
+                bf= new fabric.Image.filters.Brightness({
+                    brightness: ((main_bri-50)/50)
+                });
+                cf=   new fabric.Image.filters.Contrast({
+                    contrast: ((main_con-50)/50)
+                });
+                sf=   new fabric.Image.filters.Saturation({
+                    saturation: ((main_sat-50)/50)
+                });
+                gf=  new fabric.Image.filters.Gamma({
+                    gamma: [main_r/50+0.01, main_g/50+0.01, main_b/50+0.01]
+                });
+
+                load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight);
             }
         }
 
@@ -796,6 +831,8 @@ function  adjcontrast()
                     processFileContent(fileContent, file.name); // Call the function to process the file content
                 };
 
+                
+                
                 reader.readAsText(file); // Read the file as text
             }
         });
@@ -833,7 +870,7 @@ function  adjcontrast()
 
         function fetchFltFiles() {
             // Assuming you have a way to list the .flt files in the directory
-            console.log("Fetching FLT files...");
+            // console.log("Fetching FLT files...");
             const fltFiles = [
                 'Original.flt', 
                 'Film.flt',
@@ -850,14 +887,14 @@ function  adjcontrast()
                 fetch(`defaultFlt/${file}`)
                     .then(response => response.text())
                     .then(content => {
-                        console.log(`Processing ${file}`);
-                        processFileContent(content, file);
+                        // console.log(`Processing ${file}`);
+                        processFileContent1(content, file);
                     })
                     .catch(error => console.error('Error fetching .flt file:', error));
             });
         }
 
-        function processFileContent(content, filename) {
+        function processFileContent1(content, filename) {
             const dataParts = content.split(',');
             if (dataParts.length >= 12) { // Ensure there are enough parts
                 const newEntry = {
@@ -875,9 +912,9 @@ function  adjcontrast()
                 };
 
                 // Check if the entry already exists
-                console.log("Current totalImagesList:", totalImagesList);
+                // console.log("Current totalImagesList:", totalImagesList);
                 let exists = totalImagesList.some(item => item.name === newEntry.name);
-                console.log(`Does ${newEntry.name} exist?`, exists);
+                // console.log(`Does ${newEntry.name} exist?`, exists);
                 if (!exists) {
                     totalImagesList.push(newEntry);
                     if(totalImagesList.length == 9) {
