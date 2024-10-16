@@ -52,3 +52,15 @@ slider_blue.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_blue)
     }
 })
+
+function updateWidthBlue() {
+    width_blue = document.getElementById('sliderBar_blue').offsetWidth
+    max_blue = width_blue - slider_blue.offsetWidth
+    // Recalculate current position and update slider
+    moveX_blue = (parseInt(percent_blue.innerText) / 100) * max_blue
+    currentX_blue = moveX_blue
+    slider_blue.style.left = moveX_blue + 'px'
+}
+
+// Add event listener for window resize
+window.addEventListener('resize', updateWidthBlue)

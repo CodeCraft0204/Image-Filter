@@ -52,3 +52,13 @@ slider_red.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_red)
     }
 })
+
+function updateWidthRed() {
+    width_red = document.getElementById('sliderBar_red').offsetWidth
+    max_red = width_red - slider_red.offsetWidth
+    // Recalculate current position and update slider
+    moveX_red = (parseInt(percent_red.innerText) / 100) * max_red
+    currentX_red = moveX_red
+    slider_red.style.left = moveX_red + 'px'
+}
+window.addEventListener('resize', updateWidthRed)

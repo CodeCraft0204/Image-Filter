@@ -52,3 +52,15 @@ slider_contrast.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_contrast)
     }
 })
+
+function updateWidthContrast() {
+    width_contrast = document.getElementById('sliderBar_contrast').offsetWidth
+    max_contrast = width_contrast - slider_contrast.offsetWidth
+    // Recalculate current position and update slider
+    moveX_contrast = (parseInt(percent_contrast.innerText) / 100) * max_contrast
+    currentX_contrast = moveX_contrast
+    slider_contrast.style.left = moveX_contrast + 'px'
+}
+
+// Add event listener for window resize
+window.addEventListener('resize', updateWidthContrast)

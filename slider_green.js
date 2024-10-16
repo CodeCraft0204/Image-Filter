@@ -52,3 +52,25 @@ slider_green.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_green)
     }
 })
+
+// function updateWidthGreen() {
+//     width_green = document.getElementById('sliderBar_green').offsetWidth
+//     max_green = width_green - slider_green.offsetWidth
+//     // Recalculate current position and update slider
+//     moveX_green = (parseInt(percent_green.innerText) / 100) * max_green
+//     currentX_green = moveX_green
+//     slider_green.style.left = moveX_green + 'px'
+// }
+// window.addEventListener('resize', updateWidthGreen)
+
+function updateWidthGreen() {
+    width_green = document.getElementById('sliderBar_green').offsetWidth
+    max_green = width_green - slider_green.offsetWidth
+    // Recalculate current position and update slider
+    moveX_green = (parseInt(percent_green.innerText) / 100) * max_green
+    currentX_green = moveX_green
+    slider_green.style.left = moveX_green + 'px'
+}
+
+// Add event listener for window resize
+window.addEventListener('resize', updateWidthGreen)

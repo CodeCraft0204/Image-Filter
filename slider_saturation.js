@@ -52,3 +52,15 @@ slider_saturation.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_saturation)
     }
 })
+
+function updateWidthSaturation() {
+    width_saturation = document.getElementById('sliderBar_saturation').offsetWidth
+    max_saturation = width_saturation - slider_saturation.offsetWidth
+    // Recalculate current position and update slider
+    moveX_saturation = (parseInt(percent_saturation.innerText) / 100) * max_saturation
+    currentX_saturation = moveX_saturation
+    slider_saturation.style.left = moveX_saturation + 'px'
+}
+
+// Add event listener for window resize
+window.addEventListener('resize', updateWidthSaturation)

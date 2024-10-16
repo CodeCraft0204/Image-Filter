@@ -52,3 +52,13 @@ slider_brightness.addEventListener('mousedown', function(e){
         document.addEventListener('mouseup', mouseupEvent_brightness)
     }
 })
+
+function updateWidthBrightness() {
+    width_brightness = document.getElementById('sliderBar_brightness').offsetWidth
+    max_brightness = width_brightness - slider_brightness.offsetWidth
+    // Recalculate current position and update slider
+    moveX_brightness = (parseInt(percent_brightness.innerText) / 100) * max_brightness
+    currentX_brightness = moveX_brightness
+    slider_brightness.style.left = moveX_brightness + 'px'
+}
+window.addEventListener('resize', updateWidthBrightness)
