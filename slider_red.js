@@ -20,7 +20,7 @@ let moveEvent_red = function(e){
         let pre = (moveX_red / max_red * 100).toFixed(0)  // Percentage
         percent_red.innerText = pre
         slider_red.style.left = moveX_red + 'px'
-        main_g=pre;
+        main_r=pre;
         load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
         .then(() => {
             // alert("death or life");
