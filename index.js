@@ -567,8 +567,7 @@ function  adjcontrast()
     
                 const li = document.createElement('li');
                 const span = document.createElement('span');
-                span.innerText = filterData.name.replace(/%20/g, ' ');
-                console.log(filterData.name)
+                span.innerText = filterData.name;
     
                 li.appendChild(canvas);
                 li.appendChild(span);
@@ -869,43 +868,37 @@ function  adjcontrast()
 
         // ... existing code ...
 
-        function fetchFltFiles() {
-            fetch('defaultFlt/')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = doc.querySelectorAll('a');
-                    const fltFiles = Array.from(links)
-                        .map(link => link.href)
-                        .filter(href => href.endsWith('.flt'))
-                        .map(href => href.split('/').pop());
-        
-                    let processedFiles = 0;
-                    const totalFiles = fltFiles.length;
-        
-                    fltFiles.forEach(file => {
-                        fetch(`defaultFlt/${file}`)
-                            .then(response => response.text())
-                            .then(content => {
-                                processFileContent1(content, file);
-                                processedFiles++;
-                                if (processedFiles === totalFiles) {
-                                    createImgList(); // Call createImgList only when all files are processed
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error fetching .flt file:', error);
-                                processedFiles++;
-                                if (processedFiles === totalFiles) {
-                                    createImgList(); // Ensure createImgList is called even if there's an error
-                                }
-                            });
-                    });
-                })
-                .catch(error => console.error('Error fetching directory listing:', error));
-        }
-        
+function fetchFltFiles() {
+    // Predefined list of .flt files
+    const fltFiles = ["1-Original.flt", "Film.flt", "Gray.flt", "Movie.flt", "Relief.flt", "Retro.flt"];
+
+    let processedFiles = 0;
+    const totalFiles = fltFiles.length;
+
+    // Loop through the predefined list and fetch each file
+    fltFiles.forEach(file => {
+        fetch(`defaultFlt/${file}`)
+            .then(response => response.text())
+            .then(content => {
+                // Process each file's content
+                processFileContent1(content, file);
+                processedFiles++;
+                // Call createImgList only when all files are processed
+                if (processedFiles === totalFiles) {
+                    createImgList();
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching .flt file:', error);
+                processedFiles++;
+                // Ensure createImgList is called even if there's an error
+                if (processedFiles === totalFiles) {
+                    createImgList();
+                }
+            });
+    });
+}
+ 
         function processFileContent1(content, filename) {
             const dataParts = content.split(',');
             if (dataParts.length >= 12) {

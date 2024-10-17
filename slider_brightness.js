@@ -21,6 +21,13 @@ let moveEvent_brightness = function(e){
         percent_brightness.innerText = pre
         slider_brightness.style.left = moveX_brightness + 'px'
         main_bri=pre;
+        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
+        .then(() => {
+            // alert("death or life");
+            e.stopImmediatePropagation();
+        }).catch(err => {
+            console.error(err);
+        }); 
       //  console.log(startX_saturation,moveX_saturation,currentX_saturation)
       //  process_saturation.style.width_saturation = '280px'   // Add a hidden section in the slider
         //process_saturation.style.width_saturation = (moveX_saturation + 10) + 'px'   // Add a hidden section in the slider

@@ -21,6 +21,13 @@ let moveEvent_red = function(e){
         percent_red.innerText = pre
         slider_red.style.left = moveX_red + 'px'
         main_g=pre;
+        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
+        .then(() => {
+            // alert("death or life");
+            e.stopImmediatePropagation();
+        }).catch(err => {
+            console.error(err);
+        }); 
             //  console.log(startX_red,moveX_red,currentX_red)
        // process_red.style.width = '280px'   // Add a hidden section in the slider
         //process.style.width = (moveX_red + 10) + 'px'   // Add a hidden section in the slider

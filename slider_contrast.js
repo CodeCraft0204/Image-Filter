@@ -24,6 +24,13 @@ let moveEvent_contrast = function(e){
         main_con=pre;
        // process_contrast.style.width_contrast = '280px'   // Add a hidden section in the slider
         //process_contrast.style.width_contrast = (moveX_contrast + 10) + 'px'   // Add a hidden section in the slider
+        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
+        .then(() => {
+            // alert("death or life");
+            e.stopImmediatePropagation();
+        }).catch(err => {
+            console.error(err);
+        }); 
     }
 }
 
