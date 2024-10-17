@@ -430,7 +430,7 @@ function  adjcontrast()
 
         // main_g
         percentage_g = Math.max(0, Math.min(100, main_g));
-        let newPosition_g = (percentage_g / 100) * max_red;
+        let newPosition_g = (percentage_g / 100) * max_green;
         let slider_g = document.getElementById('slider_green') 
         let percent_g = document.getElementById('percent_green')
         slider_g.style.left = newPosition_g + 'px';
@@ -438,7 +438,7 @@ function  adjcontrast()
 
         // main_b
         percentage_b = Math.max(0, Math.min(100, main_b));
-        let newPosition_b = (percentage_b / 100) * max_red;
+        let newPosition_b = (percentage_b / 100) * max_blue;
         let slider_b = document.getElementById('slider_blue') 
         let percent_b = document.getElementById('percent_blue')
         slider_b.style.left = newPosition_b + 'px';
@@ -446,7 +446,7 @@ function  adjcontrast()
 
         // main_bri
         percentage_bri = Math.max(0, Math.min(100, main_bri));
-        let newPosition_bri = (percentage_bri / 100) * max_red;
+        let newPosition_bri = (percentage_bri / 100) * max_brightness;
         let slider_bri = document.getElementById('slider_brightness') 
         let percent_bri = document.getElementById('percent_brightness')
         slider_bri.style.left = newPosition_bri + 'px';
@@ -454,7 +454,7 @@ function  adjcontrast()
 
         // main_con
         percentage_con = Math.max(0, Math.min(100, main_con));
-        let newPosition_con = (percentage_con / 100) * max_red;
+        let newPosition_con = (percentage_con / 100) * max_contrast;
         let slider_con = document.getElementById('slider_contrast') 
         let percent_con = document.getElementById('percent_contrast')
         slider_con.style.left = newPosition_con + 'px';
@@ -462,7 +462,7 @@ function  adjcontrast()
 
         // main_sat
         percentage_sat = Math.max(0, Math.min(100, main_sat));
-        let newPosition_sat = (percentage_sat / 100) * max_red;
+        let newPosition_sat = (percentage_sat / 100) * max_saturation;
         let slider_sat = document.getElementById('slider_saturation') 
         let percent_sat = document.getElementById('percent_saturation')
         slider_sat.style.left = newPosition_sat + 'px';
