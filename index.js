@@ -567,7 +567,8 @@ function  adjcontrast()
     
                 const li = document.createElement('li');
                 const span = document.createElement('span');
-                span.innerText = filterData.name;
+                span.innerText = filterData.name.replace(/%20/g, ' ');
+                console.log(filterData.name)
     
                 li.appendChild(canvas);
                 li.appendChild(span);
