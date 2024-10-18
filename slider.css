@@ -34,8 +34,8 @@
 .contrast {
     background: linear-gradient(to right, #000000, #ffffff);
 }
-.saturation{
-    background: linear-gradient(to right, #808080, #ff0000, #ff8080);
+.saturation {
+    background: linear-gradient(to right, #808080, #ff0000, #ffffff);
 }
 .brightness {
     background: linear-gradient(to right, #000000, #ffffff);
