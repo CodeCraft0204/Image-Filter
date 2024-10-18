@@ -23,19 +23,22 @@
     width: 100%;
 }
 .red{
-    background: linear-gradient(to right, #78fcef, #f14342);
+    background: linear-gradient(to right, #000000, #ff0000, #ff8080);
 }
 .green{
-    background: linear-gradient(to right, #e93add, #58ee69);
+    background: linear-gradient(to right, #000000, #00ff00, #80ff80);
 }
 .blue{
-    background: linear-gradient(to right, #fbf97e, #202b7d);
+    background: linear-gradient(to right, #000000, #0000ff, #8080ff);
 }
-.contrast{
-    background: linear-gradient(to right, #6f84c3, #6f84c3);
+.contrast {
+    background: linear-gradient(to right, #000000, #ffffff);
 }
 .saturation{
-    background: linear-gradient(to right, #7987aa, #7987aa);
+    background: linear-gradient(to right, #808080, #ff0000, #ff8080);
+}
+.brightness {
+    background: linear-gradient(to right, #000000, #ffffff);
 }
 .slider{
     position: absolute;
