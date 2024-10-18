@@ -10,6 +10,29 @@ let startX_red = 50, // Click start position
     slider_red.style.left = max_red/2+'px'
     percent_red.innerText = 50
 
+// Debounce function
+// function debounce(func, wait) {
+//     let timeout;
+//     return function executedFunction(...args) {
+//         const later = () => {
+//             clearTimeout(timeout);
+//             func(...args);
+//         };
+//         clearTimeout(timeout);
+//         timeout = setTimeout(later, wait);
+//     };
+// }
+
+// // Debounced version of load_myfilter
+// const debouncedLoadMyFilter = debounce((id, width, height) => {
+//     load_myfilter(id, width, height)
+//         .then(() => {
+//             // Handle success if needed
+//         }).catch(err => {
+//             console.error(err);
+//         });
+// }, 50); // Adjust the delay as needed
+
 // Mouse move event
 let moveEvent_red = function(e){
     if(isDrag_red){
@@ -21,13 +44,8 @@ let moveEvent_red = function(e){
         percent_red.innerText = pre
         slider_red.style.left = moveX_red + 'px'
         main_r=pre;
-        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
-        .then(() => {
-            // alert("death or life");
-            e.stopImmediatePropagation();
-        }).catch(err => {
-            console.error(err);
-        }); 
+        debouncedLoadMyFilter("imgShow", mainimg.offsetWidth, mainimg.offsetHeight);
+
             //  console.log(startX_red,moveX_red,currentX_red)
        // process_red.style.width = '280px'   // Add a hidden section in the slider
         //process.style.width = (moveX_red + 10) + 'px'   // Add a hidden section in the slider
@@ -41,10 +59,10 @@ let mouseupEvent_red = function(e){
     // Remove event listener
     document.removeEventListener('mousemove', moveEvent_red)
     document.removeEventListener('mouseup', mouseupEvent_red)
-    load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
+    load_myfilter("imgShow", mainimg.offsetWidth, mainimg.offsetHeight)
     .then(() => {
         // alert("death or life");
-        e.stopImmediatePropagation();
+        // e.stopImmediatePropagation();
     })
     .catch(err => {
         console.error(err);

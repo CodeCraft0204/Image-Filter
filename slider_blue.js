@@ -21,13 +21,8 @@ let moveEvent_blue = function(e){
         percent_blue.innerText = pre
         slider_blue.style.left = moveX_blue + 'px'
         main_b=pre;
-        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
-        .then(() => {
-            // alert("death or life");
-            e.stopImmediatePropagation();
-        }).catch(err => {
-            console.error(err);
-        }); 
+        debouncedLoadMyFilter("imgShow", mainimg.offsetWidth, mainimg.offsetHeight);
+        
         // console.log(startX_blue,moveX_blue,currentX_blue)
         //  process_blue.style.width_blue = '280px'   // Add a hidden segment into the slider
         //process_blue.style.width_blue = (moveX_blue + 10) + 'px'   // Add a hidden segment into the slider
@@ -44,7 +39,7 @@ let mouseupEvent_blue = function(e){
     load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
     .then(() => {
         // alert("death or life");
-        e.stopImmediatePropagation();
+        // e.stopImmediatePropagation();
     })
     .catch(err => {
         console.error(err);

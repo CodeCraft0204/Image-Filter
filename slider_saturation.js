@@ -21,13 +21,8 @@ let moveEvent_saturation = function(e){
         percent_saturation.innerText = pre
         slider_saturation.style.left = moveX_saturation + 'px'
         main_sat=pre;
-        load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
-        .then(() => {
-            // alert("death or life");
-            e.stopImmediatePropagation();
-        }).catch(err => {
-            console.error(err);
-        }); 
+        debouncedLoadMyFilter("imgShow", mainimg.offsetWidth, mainimg.offsetHeight);
+        
       //  console.log(startX_saturation,moveX_saturation,currentX_saturation)
       //  process_saturation.style.width_saturation = '280px'   // Add a hidden section in the slider
         //process_saturation.style.width_saturation = (moveX_saturation + 10) + 'px'   // Add a hidden section in the slider
@@ -44,7 +39,7 @@ let mouseupEvent_saturation = function(e){
     load_myfilter("imgShow",mainimg.offsetWidth,mainimg.offsetHeight)
     .then(() => {
         // alert("death or life");
-        e.stopImmediatePropagation();
+        // e.stopImmediatePropagation();
     })
     .catch(err => {
         console.error(err);
